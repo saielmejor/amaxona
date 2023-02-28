@@ -6,6 +6,8 @@ import Product from "../components/Product";
 import axios from "axios";
 import logger from "use-reducer-logger";
 import { Helmet } from "react-helmet-async";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -46,13 +48,15 @@ function HomeScreen() {
   }, []);
   return (
     <div>
-    <Helmet><title>Amazona</title></Helmet>
+      <Helmet>
+        <title>Amazona</title>
+      </Helmet>
       <h1>Featured Products</h1>
       <div className="products">
         {loading ? (
-          <div> Loading</div>
+          <LoadingBox> </LoadingBox>
         ) : error ? (
-          <div> {error} </div>
+          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <Row>
             {products.map((product) => (
